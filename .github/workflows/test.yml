@@ -21,13 +21,63 @@ jobs:
     steps:
       - name: a failure
         run: exit 1
-  send:
-    if: failure()
-    needs: [bad]
+  notify:
     runs-on: ubuntu-latest
+    needs: [output, bad]
     steps:
-      - name: send message
+      - name: Send Success Notification
+        if: success()
         run: |
-          curl --location ${{ secrets.DC }} \
+          curl --location ${{ secrets.NOTIFICATION_URL }} \
                --header 'Content-Type: application/json' \
-               --data-raw "${{ secrets.SUCCESS_MESSAGE }}"
+               --data-raw "
+                 {
+                   \"content\": \"<@${{ secrets.NOTIFICATION_USER_ID }}>\",
+                   \"allowed_mentions\": {
+                     \"parse\": [\"users\"]
+                   },
+                   \"embeds\": [
+                     {
+                       \"color\": 11162547,
+                       \"title\": \"Workflow Success\",
+                       \"url\": \"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID\",
+                       \"description\": \"Successfully deployed [STC-Hub](https://stcentral-hub.github.io/ 'STCentral-Hub')\",
+                       \"thumbnail\": {
+                         \"url\": \"https://github.com/STCentral-Hub/stcentral-hub.github.io/raw/main/static/workflow_success.png\"
+                       },
+                       \"author\": {
+                         \"name\": \"STCentral-Hub\",
+                         \"url\": \"https://github.com/STCentral-Hub/stcentral-hub.github.io\",
+                         \"icon_url\": \"https://avatars.githubusercontent.com/u/120429077?v=4\"
+                       }
+                     }
+                   ]
+                 }
+      - name: Send Failure Notification
+        if: failure()
+        run: |
+          curl --location ${{ secrets.NOTIFICATION_URL }} \
+               --header 'Content-Type: application/json' \
+               --data-raw "
+                 {
+                   \"content\": \"<@${{ secrets.NOTIFICATION_USER_ID }}>\",
+                   \"allowed_mentions\": {
+                     \"parse\": [\"users\"]
+                   },
+                   \"embeds\": [
+                     {
+                       \"color\": 11162547,
+                       \"title\": \"Workflow Failure\",
+                       \"url\": \"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID\",
+                       \"description\": \"[STC-Hub](https://stcentral-hub.github.io/ 'STCentral-Hub') failed to deploy and may be offline\",
+                       \"thumbnail\": {
+                         \"url\": \"https://github.com/STCentral-Hub/stcentral-hub.github.io/raw/main/static/workflow_failure.png\"
+                       },
+                       \"author\": {
+                         \"name\": \"STCentral-Hub\",
+                         \"url\": \"https://github.com/STCentral-Hub/stcentral-hub.github.io\",
+                         \"icon_url\": \"https://avatars.githubusercontent.com/u/120429077?v=4\"
+                       }
+                     }
+                   ]
+                 }"
