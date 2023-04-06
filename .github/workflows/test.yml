@@ -10,8 +10,14 @@ on:
       - master
   workflow_dispatch:
 
-jobs:
+jobs:  
+  bad:
+    runs-on: ubuntu-latest
+    steps:
+      - name: a failure
+        run: exit 1
   send:
+    if: failure()
     runs-on: ubuntu-latest
     steps:
       - name: send message
