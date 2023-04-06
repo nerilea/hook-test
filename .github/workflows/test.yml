@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: a failure
-        run: exit 0
+        run: exit 1
   notify-success:
     runs-on: ubuntu-latest
     needs: [output, bad]
@@ -43,7 +43,7 @@ jobs:
                        \"url\": \"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID\",
                        \"description\": \"Successfully deployed [STC-Hub](https://stcentral-hub.github.io/ 'STCentral-Hub')\",
                        \"thumbnail\": {
-                         \"url\": \"https://github.com/STCentral-Hub/stcentral-hub.github.io/raw/main/static/workflow_success.png\"
+                         \"url\": \"https://github.com/nerilea/hook-test/raw/master/workflow_success.png\"
                        },
                        \"author\": {
                          \"name\": \"STCentral-Hub\",
@@ -75,7 +75,7 @@ jobs:
                        \"url\": \"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID\",
                        \"description\": \"[STC-Hub](https://stcentral-hub.github.io/ 'STCentral-Hub') failed to deploy and may be offline\",
                        \"thumbnail\": {
-                         \"url\": \"https://github.com/STCentral-Hub/stcentral-hub.github.io/raw/main/static/workflow_failure.png\"
+                         \"url\": \"https://github.com/nerilea/hook-test/raw/master/workflow_failure.png\"
                        },
                        \"author\": {
                          \"name\": \"STCentral-Hub\",
