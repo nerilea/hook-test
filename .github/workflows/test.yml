@@ -4,6 +4,14 @@ defaults:
   run:
     shell: bash
 
+on:
+  push:
+    paths-ignore:
+      - "LICENSE.md"
+      - "README.md"
+    branches:
+      - main
+
 jobs:
   send:
     runs-on: ubuntu-latest
