@@ -14,10 +14,10 @@ jobs:
       - name: curl version
         run: curl --version
       - name: url variable
-        run: echo $URL
+        run: echo ${{ vars.URL }} && echo ${{ vars.DC }}
       - name: send message
         run: |
-          curl curl --location $URL \
+          curl curl --location ${{ vars.DC }} \
                     --header 'Content-Type: application/json' \
                     --data-raw '{
                        "content": "<@518279229222289418>",
