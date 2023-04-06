@@ -10,7 +10,12 @@ on:
       - master
   workflow_dispatch:
 
-jobs:  
+jobs:
+  output:
+    runs-on: ubuntu-latest
+    steps:
+      - name: variables
+        run: echo "${{ github.serverUrl }}/${{ github.repository }}//actions/runs/${{ github.runId }}"
   bad:
     runs-on: ubuntu-latest
     steps:
