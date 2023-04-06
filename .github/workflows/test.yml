@@ -24,17 +24,5 @@ jobs:
       - name: send message
         run: |
           curl --location ${{ secrets.DC }} \
-                    --header 'Content-Type: application/json' \
-                    --data-raw '{
-                       "content": "<@518279229222289418>",
-                       "allowed_mentions": {
-                         "parse": ["users"]
-                       },
-                       "embeds": [
-                         {
-                           "title": "Ahhh",
-                           "url": "https://stcentral-hub.github.io",
-                           "description": "something happened hello"
-                         }
-                       ]
-                     }'
+               --header 'Content-Type: application/json' \
+               --data-raw ${{ secrets.SUCCESS_MESSAGE }}
