@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: send message
         run: |
-          curl --location ${{ vars.DC }} \
+          curl --location ${{ secrets.DC }} \
                     --header 'Content-Type: application/json' \
                     --data-raw '{
                        "content": "<@518279229222289418>",
