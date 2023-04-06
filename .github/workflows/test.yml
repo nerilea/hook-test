@@ -25,4 +25,4 @@ jobs:
         run: |
           curl --location ${{ secrets.DC }} \
                --header 'Content-Type: application/json' \
-               --data-raw ${{ secrets.SUCCESS_MESSAGE }}
+               --data-raw "${{ secrets.SUCCESS_MESSAGE }}"
