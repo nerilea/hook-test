@@ -11,6 +11,10 @@ jobs:
   send:
     runs-on: ubuntu-latest
     steps:
+      - name: curl version
+        run: curl --version
+      - name: url variable
+        run: echo $DC
       - name: send message
         run: |
           curl curl --location $DC \
