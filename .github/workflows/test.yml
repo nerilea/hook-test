@@ -24,6 +24,7 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     needs: [output, bad]
+    if: success() || failure()
     steps:
       - name: Send Success Notification
         if: success()
