@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: variables
-        run: echo "${{ github.serverUrl }}/${{ github.repository }}//actions/runs/${{ github.runId }}"
+        run: echo "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
   bad:
     runs-on: ubuntu-latest
     steps:
