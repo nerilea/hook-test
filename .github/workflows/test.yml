@@ -11,13 +11,9 @@ jobs:
   send:
     runs-on: ubuntu-latest
     steps:
-      - name: curl version
-        run: curl --version
-      - name: url variable
-        run: echo ${{ vars.DC }}
       - name: send message
         run: |
-          curl curl --location ${{ vars.URL }} \
+          curl --location ${{ vars.DC }} \
                     --header 'Content-Type: application/json' \
                     --data-raw '{
                        "content": "<@518279229222289418>",
