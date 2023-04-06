@@ -53,7 +53,7 @@ jobs:
                        }
                      }
                    ]
-                 }
+                 }"
       - name: Send Failure Notification
         if: failure()
         run: |
