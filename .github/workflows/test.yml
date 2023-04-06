@@ -1,0 +1,27 @@
+name: "push message"
+# Default to bash
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - name: send message
+        run: |
+          curl curl --location $DC \
+                    --header 'Content-Type: application/json' \
+                    --data-raw '{
+                       "content": "<@518279229222289418>",
+                       "allowed_mentions": {
+                         "parse": ["users"]
+                       },
+                       "embeds": [
+                         {
+                           "title": "Ahhh",
+                           "url": "https://stcentral-hub.github.io",
+                           "description": "something happened hello"
+                         }
+                       ]
+                     }'
